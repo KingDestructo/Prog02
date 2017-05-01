@@ -46,8 +46,13 @@ string dishName[maxDishNames];
 	 need to synchronize threads, plus whatever other
          variables you want. */
 
+//Create an array of trivet semaphores, one semaphore per trivet
+
 create sim_sem trivets[numTrivets];
-create sim_sem buser;
+
+//Create a semaphore for the busser
+
+create sim_sem busser;
 
       /* child_t are global variables to represent the
 	 dynamically-created threads. */
