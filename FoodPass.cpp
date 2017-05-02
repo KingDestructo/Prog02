@@ -45,9 +45,12 @@ string dishName[maxDishNames];
       /* Here declare the array(s) of semaphores you will
 	 need to synchronize threads, plus whatever other
          variables you want. */
-
+//create array of semaphores, one for each trivet
 sim_semaphore trivets[numTrivets];
-sim_semaphore buser;
+//create a semaphore for the busser
+sim_semaphore busser;
+//create a semaphore for the server
+sim_semaphore server;
 
       /* child_t are global variables to represent the
 	 dynamically-created threads. */
@@ -124,6 +127,10 @@ void init()
 		trivets[i](0); //I want all of the diners to wait until the first dish is placed.
 	}
 	buser(0); //I want the buser to wait as well.  
+	
+	//set the server semaphore to 0
+	server(0);
+	
  /* Give some mnemonic names to the dishes.  The first name is
     used for an empty trivet.  The last name denotes the check
     (bill) for the meal.  This is coded so no changes are needed
@@ -181,6 +188,8 @@ void * Server(void * ignore)
 
       /* When the trivet is available, I place the dish on the
          trivet to my right. */
+	  
+	  
 
        /* Here do a synchronization task.  One thing you need to
 	  do is be sure that you are not going to place a dish on
