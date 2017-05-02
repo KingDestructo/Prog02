@@ -46,13 +46,8 @@ string dishName[maxDishNames];
 	 need to synchronize threads, plus whatever other
          variables you want. */
 
-//Create an array of trivet semaphores, one semaphore per trivet
-
-create sim_sem trivets[numTrivets];
-
-//Create a semaphore for the busser
-
-create sim_sem busser;
+sim_semaphore trivets[numTrivets];
+sim_semaphore buser;
 
       /* child_t are global variables to represent the
 	 dynamically-created threads. */
@@ -124,9 +119,9 @@ void init()
     /* Here initialize the array(s) of semaphores, and 
        whatever other variables you use.  */
 
-	for (int i =0; i < numDiners;i++ )
+	for (int i =0; i < numTrivets;i++ )
 	{
-		diners[i](1); //I want all of the diners to wait until the first dish is placed.
+		trivets[i](0); //I want all of the diners to wait until the first dish is placed.
 	}
 	buser(1); //I want the buser to wait as well.  
  /* Give some mnemonic names to the dishes.  The first name is
