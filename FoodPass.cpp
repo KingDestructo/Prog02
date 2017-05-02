@@ -46,7 +46,7 @@ string dishName[maxDishNames];
 	 need to synchronize threads, plus whatever other
          variables you want. */
 //create array of semaphores, one for each trivet
-sim_semaphore trivets[numTrivets];
+sim_semaphore semTrivets[numTrivets];
 //create a semaphore for the busser
 sim_semaphore busser;
 //create a semaphore for the server
@@ -124,7 +124,7 @@ void init()
 
 	for (int i =0; i < numTrivets;i++ )
 	{
-		trivets[i](0); //I want all of the diners to wait until the first dish is placed.
+		semTrivets[i](0); //I want all of the diners to wait until the first dish is placed.
 	}
 	buser(0); //I want the buser to wait as well.  
 	
@@ -189,16 +189,15 @@ void * Server(void * ignore)
       /* When the trivet is available, I place the dish on the
          trivet to my right. */
 	  
+	  //have the server check the status of the trivet
+	  
+	  wait_sem semTrivets[0];
 	  
 
        /* Here do a synchronization task.  One thing you need to
 	  do is be sure that you are not going to place a dish on
 	  a trivet that already has a dish on it.  *DO NOT* just
 	  busy-wait until you see that the trivet is empty. */
-	for (int i=0; I < numTrivets< i++)
-	{
-	wait(trivets[i])
-	}
     trivet[0]=i; // put dish #i onto trivet #0.
     pthread_mutex_lock(&stdoutLock) ;
     cout << "Server places " << dishName[trivet[0]] 
@@ -208,7 +207,10 @@ void * Server(void * ignore)
        /* Here you may want to a synchronization task --
 	  something that "opens the door" for diner #0 to get
 	  access to the new dish. */
-	signal(trivets[0]);
+	  
+	  //have the server signal that trivet 0 now has food on it
+	
+	  signal_sem(semTrivets[0]);
 
 
 
@@ -249,6 +251,9 @@ void * Diner(void * postnPtr)
 	  do is be sure that there is a new dish on the trivet to
 	  your left now, and that the person on your left has
 	  "let go" of it. */
+	  
+	  //have the diner wait on the trivet to its left to see if it is ready to be taken
+	  wait_sem(semTrivets[trivet to the left]);
 
 	
 	
