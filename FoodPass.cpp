@@ -123,7 +123,7 @@ void init()
 	{
 		trivets[i](0); //I want all of the diners to wait until the first dish is placed.
 	}
-	buser(1); //I want the buser to wait as well.  
+	buser(0); //I want the buser to wait as well.  
  /* Give some mnemonic names to the dishes.  The first name is
     used for an empty trivet.  The last name denotes the check
     (bill) for the meal.  This is coded so no changes are needed
@@ -186,7 +186,10 @@ void * Server(void * ignore)
 	  do is be sure that you are not going to place a dish on
 	  a trivet that already has a dish on it.  *DO NOT* just
 	  busy-wait until you see that the trivet is empty. */
-
+	for (int i=0; I < numTrivets< i++)
+	{
+	wait(trivets[i])
+	}
     trivet[0]=i; // put dish #i onto trivet #0.
     pthread_mutex_lock(&stdoutLock) ;
     cout << "Server places " << dishName[trivet[0]] 
@@ -196,7 +199,7 @@ void * Server(void * ignore)
        /* Here you may want to a synchronization task --
 	  something that "opens the door" for diner #0 to get
 	  access to the new dish. */
-	signal(diners[0]);
+	signal(trivets[0]);
 
 
 
@@ -238,14 +241,7 @@ void * Diner(void * postnPtr)
 	  your left now, and that the person on your left has
 	  "let go" of it. */
 
-	if (trivet0isfull)
-	{
-		signal diners[0];
-	}
-	if (trivet1isfull)
-	{
-		signal diners[1];
-	}
+	
 	
       /* I declare what I am doing */
     pthread_mutex_lock(&stdoutLock) ;
