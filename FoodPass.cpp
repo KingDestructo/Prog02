@@ -1,3 +1,7 @@
+//Schuyler Davis
+//Timothy Gibson
+//CS3750
+//Prog02
 /* In this program the server puts dishes full of food on one end of a table and diners pass the dishes down to the other end of the table where they are collected by the busser. 
 
 The job of each diner is to perform a loop:
