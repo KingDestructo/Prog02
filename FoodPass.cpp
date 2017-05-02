@@ -48,7 +48,7 @@ string dishName[maxDishNames];
 //create array of semaphores, one for each trivet
 sim_semaphore semTrivets[numTrivets];
 //create a semaphore for the busser
-sim_semaphore busser;
+sim_semaphore finished;
 //create a semaphore for the server
 sim_semaphore server;
 
@@ -126,7 +126,7 @@ void init()
 	{
 		semTrivets[i](0); //I want all of the diners to wait until the first dish is placed.
 	}
-	buser(0); //I want the buser to wait as well.  
+	finished(0); //I want the buser to wait as well.  
 	
 	//set the server semaphore to 0
 	server(0);
@@ -278,17 +278,14 @@ void * Diner(void * postnPtr)
        /* Here do a synchronization task.  One thing you need to
 	  do is be sure that the trivet on your right does not
 	  have a dish on it now.*/
-	if (trivet1isfull)
+	if (semTrivets[position].value >0)
 	{
-		wait(diners[0]); //hold off on moving that dish.
+		wait(semTrivets[position+1]); //hold off on moving that dish.
 	}
 	
+	//I am checking if the trivet to the right has a dish on it and if so then I will wait.
+	signal (semTrivets[position+1]);
 	
-	if (trivet2isfull)
-	{
-		wait(diners[1]);
-		
-	}
 	// so the else on both of these is the dishes moving
 	
     pthread_mutex_lock(&stdoutLock) ;
@@ -307,21 +304,12 @@ void * Diner(void * postnPtr)
 	  is now empty.  The person on your right will need to
 	  find out that the trivet on your right now has a new
 	  dish on it.  */
-	if (id ==diners[0])
-		{
-			trivet0isfull=false;
-			signal(diners[1]);
-		}
-	if (id ==diners[1])
-	{
-		trivet1isfull=false;
-		signal(buser);
-	}
-
-  }
-  pthread_exit ((void *)0) ;
+	sem_wait(semTrivets[position]);
+	
+	//and now the user goes back into waiting for the next dish
+	pthread_exit ((void *)0) ;
 }
-
+}
 /* ################################################## */
 /*                       Busser                       */
 /* ################################################## */
@@ -352,7 +340,7 @@ void * Busser (void * ignore)
 	  do is be sure that there is a new dish on the trivet to
 	  your left now, and that the person on your left has
 	  "let go" of it. */
-
+	wait (semTrivets[numTrivets-1]);
 
 
     pthread_mutex_lock(&stdoutLock) ;
@@ -365,8 +353,8 @@ void * Busser (void * ignore)
        /* Here do a synchronization task. The person on your left
 	  will need to find out that the trivet on your left is
 	  now empty.  */
-
-
+	signal (finished);
+	//ask about what to do here. I am not sure what else we need here.
 
   }
   return (void *) 0 ;
