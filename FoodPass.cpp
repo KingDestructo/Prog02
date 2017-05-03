@@ -49,8 +49,10 @@ string dishName[maxDishNames];
       /* Here declare the array(s) of semaphores you will
 	 need to synchronize threads, plus whatever other
          variables you want. */
-//create array of semaphores, one for each trivet
-sim_semaphore semTrivets[numTrivets];
+//create array of "empty" semaphores, one for each trivet
+sim_semaphore emptyTrivets[numTrivets];
+//create an array of "full" trivets
+sim_semaphore fullTrivets[numTrivets];
 //create a semaphore for the busser
 sim_semaphore finished;
 //create a semaphore for the server
@@ -125,6 +127,9 @@ void init()
 
     /* Here initialize the array(s) of semaphores, and 
        whatever other variables you use.  */
+	
+	//initialize empty trivets to 1
+	//initialize full trivets to 0
 
 	for (int i =0; i < numTrivets;i++ )
 	{
