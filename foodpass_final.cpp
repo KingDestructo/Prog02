@@ -1,3 +1,7 @@
+//Schuyler Davis
+//Timothy Gibson
+//CS3750
+//Prog02
 /* In this program the server puts dishes full of food on one end of a table and diners pass the dishes down to the other end of the table where they are collected by the busser.
 
 The job of each diner is to perform a loop:
@@ -46,7 +50,12 @@ string dishName[maxDishNames];
 	 need to synchronize threads, plus whatever other
          variables you want. */
 
+         sim_semaphore emptyTrivets[numTrivets];
+         sim_semaphore fullTrivets[numTrivets];
 
+         sim_semaphore server;
+
+         sim_semaphore finished;
 
 
       /* child_t are global variables to represent the
@@ -114,15 +123,23 @@ void init()
     /* Initialize the trivets to indicate that each contains "no
        dish." */
 
-  for (index=0; index<numTrivets; index++) trivet[index]=0;
 
     /* Here initialize the array(s) of semaphores, and
        whatever other variables you use.  */
 
+//initialize emptyTrivets to 1
 
+  for (int i = 0; i < numTrivets; i++ )
+  {
+    fullTrivets[i] = create_sim_sem(0); //I want all of the diners to wait until the first dish is placed.
+    emptyTrivets[i] = create_sim_sem(1);
+  }
 
+  //set the finished sem to 0
+  finished = create_sim_sem(0);
 
-
+  //set the server semaphore to 0
+  server = create_sim_sem(0);
 
  /* Give some mnemonic names to the dishes.  The first name is
     used for an empty trivet.  The last name denotes the check
@@ -187,6 +204,8 @@ void * Server(void * ignore)
 	  a trivet that already has a dish on it.  *DO NOT* just
 	  busy-wait until you see that the trivet is empty. */
 
+    wait_sem(emptyTrivets[0]);
+
     trivet[0]=i; // put dish #i onto trivet #0.
     pthread_mutex_lock(&stdoutLock) ;
     cout << "Server places " << dishName[trivet[0]]
@@ -197,7 +216,7 @@ void * Server(void * ignore)
 	  something that "opens the door" for diner #0 to get
 	  access to the new dish. */
 
-
+    signal_sem(fullTrivets[0]);
 
 
   }
