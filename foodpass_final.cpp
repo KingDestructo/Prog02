@@ -122,16 +122,17 @@ void init()
 
     /* Initialize the trivets to indicate that each contains "no
        dish." */
-
+for (index=0; index<numTrivets; index++) trivet[index]=0;
 
     /* Here initialize the array(s) of semaphores, and
        whatever other variables you use.  */
 
 //initialize emptyTrivets to 1
+//initialize fullTrivets to 0
 
   for (int i = 0; i < numTrivets; i++ )
   {
-    fullTrivets[i] = create_sim_sem(0); //I want all of the diners to wait until the first dish is placed.
+    fullTrivets[i] = create_sim_sem(0);
     emptyTrivets[i] = create_sim_sem(1);
   }
 
@@ -257,7 +258,7 @@ void * Diner(void * postnPtr)
 	  your left now, and that the person on your left has
 	  "let go" of it. */
 
-
+wait_sem(fullTrivets[position]);
 
 
       /* I declare what I am doing */
@@ -283,7 +284,7 @@ void * Diner(void * postnPtr)
 	  have a dish on it now.*/
 
 
-
+signal_sem(fullTrivets[position+1]);
 
     pthread_mutex_lock(&stdoutLock) ;
     cout << "Diner number "<< position << " moves "
