@@ -306,7 +306,7 @@ signal_sem(fullTrivets[position+1]);
 	  find out that the trivet on your right now has a new
 	  dish on it.  */
 
-
+signal_sem()
 
   }
   pthread_exit ((void *)0) ;
@@ -357,6 +357,7 @@ wait_sem(fullTrivets[numTrivets-1]);
 	  now empty.  */
 
 signal_sem(emptyTrivets[numTrivets-1]);
+
 
   }
   return (void *) 0 ;
