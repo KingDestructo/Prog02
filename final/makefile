@@ -8,7 +8,7 @@
 # at the shell prompt while 'in' the directory
 
 foodPass: foodPass.o sem.o
-	g++ -o foodPass foodPass.o sem.o  
+	g++ -pthread -o foodPass foodPass.o sem.o  
 foodPass.o: foodPass.cpp sem.h
 	g++ -c foodPass.cpp
 sem.o: sem.cpp sem.h
