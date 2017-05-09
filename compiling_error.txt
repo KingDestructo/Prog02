@@ -1,0 +1,8 @@
+C:\Users\Timothy\Documents\GitHub\Prog02\foodpass_final.cpp: In function 'void init()':
+C:\Users\Timothy\Documents\GitHub\Prog02\foodpass_final.cpp:112:29: error: 'srandom' was not declared in this scope
+   srandom(time((time_t *) 0)); /* INITIALIZE RANDOM NUMBER GENERATOR */
+                             ^
+C:\Users\Timothy\Documents\GitHub\Prog02\foodpass_final.cpp: In function 'void delayAsMuchAs(int)':
+C:\Users\Timothy\Documents\GitHub\Prog02\foodpass_final.cpp:173:20: error: 'random' was not declared in this scope
+   time=(int)random()%limit;
+                    ^

@@ -2,7 +2,7 @@
 //Timothy Gibson
 //CS3750
 //Prog02
-/* In this program the server puts dishes full of food on one end of a table and diners pass the dishes down to the other end of the table where they are collected by the busser. 
+/* In this program the server puts dishes full of food on one end of a table and diners pass the dishes down to the other end of the table where they are collected by the busser.
 
 The job of each diner is to perform a loop:
 become ready for the next dish,
@@ -75,7 +75,7 @@ pthread_t child_t[numTrivets] ;
 	    sem.cpp imports "checking".  Therefore the semaphore operations
 	    will write lots of messages if you set checking=1.  */
 
-int checking ; 
+int checking ;
 
       /* In some programs, we use the "stdoutLock" variable declared below to
 	 get intelligible printouts from multiple concurrent threads that write
@@ -105,7 +105,7 @@ struct threadIdType
 /* ################################################## */
 /*                         init                       */
 /* ################################################## */
-void init() 
+void init()
 {
   int index ;
 
@@ -125,21 +125,14 @@ void init()
 
   for (index=0; index<numTrivets; index++) trivet[index]=0;
 
-    /* Here initialize the array(s) of semaphores, and 
+    /* Here initialize the array(s) of semaphores, and
        whatever other variables you use.  */
-	
+
 	//initialize empty trivets to 1
 	//initialize full trivets to 0
 
-	for (int i =0; i < numTrivets;i++ )
-	{
-		semTrivets[i](0); //I want all of the diners to wait until the first dish is placed.
-	}
-	finished(0); //I want the buser to wait as well.  
 	
-	//set the server semaphore to 0
-	server(0);
-	
+
  /* Give some mnemonic names to the dishes.  The first name is
     used for an empty trivet.  The last name denotes the check
     (bill) for the meal.  This is coded so no changes are needed
@@ -197,28 +190,28 @@ void * Server(void * ignore)
 
       /* When the trivet is available, I place the dish on the
          trivet to my right. */
-	  
+
 	  //have the server check the status of the trivet
-	  
-	  wait_sem semTrivets[0];
-	  
 
        /* Here do a synchronization task.  One thing you need to
 	  do is be sure that you are not going to place a dish on
 	  a trivet that already has a dish on it.  *DO NOT* just
 	  busy-wait until you see that the trivet is empty. */
-    trivet[0]=i; // put dish #i onto trivet #0.
-    pthread_mutex_lock(&stdoutLock) ;
-    cout << "Server places " << dishName[trivet[0]] 
-         << " on trivet #0." << endl ;
-    pthread_mutex_unlock(&stdoutLock);
+
+    wait_sem
+
+    // trivet[0]=i; // put dish #i onto trivet #0.
+    // pthread_mutex_lock(&stdoutLock) ;
+    // cout << "Server places " << dishName[trivet[0]]
+        //  << " on trivet #0." << endl ;
+    // pthread_mutex_unlock(&stdoutLock);
 
        /* Here you may want to a synchronization task --
 	  something that "opens the door" for diner #0 to get
 	  access to the new dish. */
-	  
+
 	  //have the server signal that trivet 0 now has food on it
-	
+
 	  signal_sem(semTrivets[0]);
 
 
@@ -253,26 +246,26 @@ void * Diner(void * postnPtr)
 	   dish.*/
 
     delayAsMuchAs(delayLimit);
-    
+
       /* When available, I pick up the next new dish on my left. */
 
        /* Here do a synchronization task.  One thing you need to
 	  do is be sure that there is a new dish on the trivet to
 	  your left now, and that the person on your left has
 	  "let go" of it. */
-	  
+
 	  //have the diner wait on the trivet to its left to see if it is ready to be taken
 	  wait_sem(semTrivets[trivet to the left]);
 
-	
-	
+
+
       /* I declare what I am doing */
     pthread_mutex_lock(&stdoutLock) ;
     cout << "Diner number "<< position ;
     if (i<numDishNames-1) cout << " enjoys ";
     else if (position<numDiners-1) cout << " examines " ;
          else cout << " examines and pays " ;
-    
+
     cout << dishName[trivet[position]] << endl ;
     pthread_mutex_unlock(&stdoutLock);
 
@@ -291,14 +284,14 @@ void * Diner(void * postnPtr)
 	{
 		wait(semTrivets[position+1]); //hold off on moving that dish.
 	}
-	
+
 	//I am checking if the trivet to the right has a dish on it and if so then I will wait.
 	signal (semTrivets[position+1]);
-	
+
 	// so the else on both of these is the dishes moving
-	
+
     pthread_mutex_lock(&stdoutLock) ;
-    cout << "Diner number "<< position << " moves " 
+    cout << "Diner number "<< position << " moves "
          << dishName[trivet[position]] << " from trivet #"
          << position << " to trivet #" << position+1 << endl;
     pthread_mutex_unlock(&stdoutLock);
@@ -314,7 +307,7 @@ void * Diner(void * postnPtr)
 	  find out that the trivet on your right now has a new
 	  dish on it.  */
 	sem_wait(semTrivets[position]);
-	
+
 	//and now the user goes back into waiting for the next dish
 	pthread_exit ((void *)0) ;
 }
@@ -372,14 +365,14 @@ void * Busser (void * ignore)
 /* ################################################## */
 /*                         Main                       */
 /* ################################################## */
-int main() 
-{ 
-  init(); 
+int main()
+{
+  init();
 
   cout << endl << endl;
   cout << "Welcome to the restaurant!" << endl ;
   cout << numDiners << " will be dining." << endl ;
-  cout << "The meal will consist of " << numDishNames-2 
+  cout << "The meal will consist of " << numDishNames-2
        << " dishes." << endl;
   cout << "Bon appetit!" << endl ;
   cout << endl << endl;
@@ -389,7 +382,7 @@ int main()
        /* This is a pointer to a struct (class) that contains an int
           field - it is a convenient data type to use as the parameter
           to the child function.  */
-   threadIdType * idPtr ; 
+   threadIdType * idPtr ;
 
   for (i=0; i<numDiners; i++)
   {
@@ -399,25 +392,23 @@ int main()
 
      if (0!=pthread_create(&child_t[i], NULL, Diner, (void *) idPtr))
         {cout << "THREAD CREATION FAILURE!" << endl; exit(-1) ;}
-     
+
      if (0!=pthread_detach(child_t[i]))
         {cout << "THREAD DETACHMENT FAILURE!" << endl ; exit(-1) ;}
   }
 
      if (0!=pthread_create(&child_t[numDiners], NULL, Server, (void *) 0))
         {cout << "THREAD CREATION FAILURE!" << endl; exit(-1) ;}
-     
+
      if (0!=pthread_detach(child_t[numDiners]))
         {cout << "THREAD DETACHMENT FAILURE!" << endl ; exit(-1) ;}
-	
+
   Busser((void *)0) ;
 
   cout << endl << endl;
   cout << "Thank you for coming!" << endl ;
   cout << endl << endl;
-  
+
   return 0 ;
 
 }
-
-
