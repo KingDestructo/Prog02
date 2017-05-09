@@ -2,7 +2,7 @@
      (Latest Revision: October 23, 2011)
  
 */
-
+#include <stdlib.h>
 #include <iostream>
 #include <pthread.h>
 #include "sem.h"

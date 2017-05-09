@@ -23,6 +23,9 @@ avoid the possibility that a person could place one dish on top of another.
 make sure everyone gets finished eating and the check gets paid.
 make sure that only two threads are involved in regulating access to each trivet: the thread that puts dishes onto the trivet and the thread that takes them off.
 Your grade depends on how well you achieve these goals. */
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <iostream>
 #include <sched.h>
 #include <time.h>
@@ -30,7 +33,7 @@ Your grade depends on how well you achieve these goals. */
 #include <string>
 #include "sem.h"
 
-using namespace std ;
+using namespace std;
 
 /* ######################################## */
 /*             Global Variables             */
@@ -109,7 +112,7 @@ void init()
 {
   int index ;
 
-  srandom(time((time_t *) 0)); /* INITIALIZE RANDOM NUMBER GENERATOR */
+  srand(time((time_t *) 0)); /* INITIALIZE RANDOM NUMBER GENERATOR */
 
   checking = 0 ;
 
