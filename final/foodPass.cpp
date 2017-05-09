@@ -287,7 +287,8 @@ wait_sem(fullTrivets[position]);
 	  have a dish on it now.*/
 
 wait_sem(emptyTrivets[position+1]);
-signal_sem(fullTrivets[position+1]);
+
+
 
     pthread_mutex_lock(&stdoutLock) ;
     cout << "Diner number "<< position << " moves "
