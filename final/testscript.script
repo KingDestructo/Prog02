@@ -1,0 +1,119 @@
+Script started on Mon 08 May 2017 09:25:32 PM DST
+]0;kingdestruct@DESKTOP-DR7LT5K: /mnt/c/Users/Timothy/Documents/GitHub/Prog02/finalkingdestruct@DESKTOP-DR7LT5K:/mnt/c/Users/Timothy/Documents/GitHub/Prog02/final$ ./foodPass
+
+
+Welcome to the restaurant!
+2 will be dining.
+The meal will consist of 3 dishes.
+Bon appetit!
+
+
+Server places vegetable soup on trivet #0.
+Diner number 0 enjoys vegetable soup
+Diner number 0 moves vegetable soup from trivet #0 to trivet #1
+Diner number 1 enjoys vegetable soup
+Server places bread and butter on trivet #0.
+Diner number 1 moves vegetable soup from trivet #1 to trivet #2
+Busser removes vegetable soup from trivet #2.
+Diner number 0 enjoys bread and butter
+Diner number 0 moves bread and butter from trivet #0 to trivet #1
+Server places beets and chickpeas on trivet #0.
+Diner number 1 enjoys bread and butter
+Diner number 0 enjoys beets and chickpeas
+Diner number 1 moves bread and butter from trivet #1 to trivet #2
+Busser removes bread and butter from trivet #2.
+Diner number 0 moves beets and chickpeas from trivet #0 to trivet #1
+Diner number 1 enjoys beets and chickpeas
+Server places check on trivet #0.
+Diner number 1 moves beets and chickpeas from trivet #1 to trivet #2
+Busser removes beets and chickpeas from trivet #2.
+Diner number 0 examines check
+Diner number 0 moves check from trivet #0 to trivet #1
+Diner number 1 examines and pays check
+Diner number 1 moves check from trivet #1 to trivet #2
+Busser removes check from trivet #2.
+
+
+Thank you for coming!
+
+
+]0;kingdestruct@DESKTOP-DR7LT5K: /mnt/c/Users/Timothy/Documents/GitHub/Prog02/finalkingdestruct@DESKTOP-DR7LT5K:/mnt/c/Users/Timothy/Documents/GitHub/Prog02/final$ ./foodPass
+
+
+Welcome to the restaurant!
+2 will be dining.
+The meal will consist of 3 dishes.
+Bon appetit!
+
+
+Server places vegetable soup on trivet #0.
+Diner number 0 enjoys vegetable soup
+Diner number 0 moves vegetable soup from trivet #0 to trivet #1
+Diner number 1 enjoys vegetable soup
+Server places bread and butter on trivet #0.
+Diner number 1 moves vegetable soup from trivet #1 to trivet #2
+Diner number 0 enjoys bread and butter
+Busser removes vegetable soup from trivet #2.
+Diner number 0 moves bread and butter from trivet #0 to trivet #1
+Server places beets and chickpeas on trivet #0.
+Diner number 1 enjoys bread and butter
+Diner number 1 moves bread and butter from trivet #1 to trivet #2
+Busser removes bread and butter from trivet #2.
+Diner number 0 enjoys beets and chickpeas
+Diner number 0 moves beets and chickpeas from trivet #0 to trivet #1
+Diner number 1 enjoys beets and chickpeas
+Diner number 1 moves beets and chickpeas from trivet #1 to trivet #2
+Server places check on trivet #0.
+Busser removes beets and chickpeas from trivet #2.
+Diner number 0 examines check
+Diner number 0 moves check from trivet #0 to trivet #1
+Diner number 1 examines and pays check
+Diner number 1 moves check from trivet #1 to trivet #2
+Busser removes check from trivet #2.
+
+
+Thank you for coming!
+
+
+]0;kingdestruct@DESKTOP-DR7LT5K: /mnt/c/Users/Timothy/Documents/GitHub/Prog02/finalkingdestruct@DESKTOP-DR7LT5K:/mnt/c/Users/Timothy/Documents/GitHub/Prog02/final$ ./foodPass
+
+
+Welcome to the restaurant!
+2 will be dining.
+The meal will consist of 3 dishes.
+Bon appetit!
+
+
+Server places vegetable soup on trivet #0.
+Diner number 0 enjoys vegetable soup
+Diner number 0 moves vegetable soup from trivet #0 to trivet #1
+Diner number 1 enjoys vegetable soup
+Diner number 1 moves vegetable soup from trivet #1 to trivet #2
+Busser removes vegetable soup from trivet #2.
+Server places bread and butter on trivet #0.
+Diner number 0 enjoys bread and butter
+Diner number 0 moves bread and butter from trivet #0 to trivet #1
+Diner number 1 enjoys bread and butter
+Server places beets and chickpeas on trivet #0.
+Diner number 0 enjoys beets and chickpeas
+Diner number 1 moves bread and butter from trivet #1 to trivet #2
+Busser removes bread and butter from trivet #2.
+Diner number 0 moves beets and chickpeas from trivet #0 to trivet #1
+Diner number 1 enjoys beets and chickpeas
+Diner number 1 moves beets and chickpeas from trivet #1 to trivet #2
+Server places check on trivet #0.
+Busser removes beets and chickpeas from trivet #2.
+Diner number 0 examines check
+Diner number 0 moves check from trivet #0 to trivet #1
+Diner number 1 examines and pays check
+Diner number 1 moves check from trivet #1 to trivet #2
+Busser removes check from trivet #2.
+
+
+Thank you for coming!
+
+
+]0;kingdestruct@DESKTOP-DR7LT5K: /mnt/c/Users/Timothy/Documents/GitHub/Prog02/finalkingdestruct@DESKTOP-DR7LT5K:/mnt/c/Users/Timothy/Documents/GitHub/Prog02/final$ exit
+exit
+
+Script done on Mon 08 May 2017 09:25:46 PM DST
