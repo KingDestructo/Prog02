@@ -286,7 +286,7 @@ wait_sem(fullTrivets[position]);
 	  do is be sure that the trivet on your right does not
 	  have a dish on it now.*/
 
-
+wait_sem(emptyTrivets[position+1]);
 signal_sem(fullTrivets[position+1]);
 
     pthread_mutex_lock(&stdoutLock) ;
@@ -306,7 +306,8 @@ signal_sem(fullTrivets[position+1]);
 	  find out that the trivet on your right now has a new
 	  dish on it.  */
 
-signal_sem()
+signal_sem(emptyTrivets[position]);
+signal_sem(fullTrivets[position+1]);
 
   }
   pthread_exit ((void *)0) ;
