@@ -56,9 +56,7 @@ string dishName[maxDishNames];
          sim_semaphore emptyTrivets[numTrivets];
          sim_semaphore fullTrivets[numTrivets];
 
-         sim_semaphore server;
-
-         sim_semaphore finished;
+         
 
 
       /* child_t are global variables to represent the
@@ -139,11 +137,7 @@ for (index=0; index<numTrivets; index++) trivet[index]=0;
     emptyTrivets[i] = create_sim_sem(1);
   }
 
-  //set the finished sem to 0
-  finished = create_sim_sem(0);
-
-  //set the server semaphore to 0
-  server = create_sim_sem(0);
+  
 
  /* Give some mnemonic names to the dishes.  The first name is
     used for an empty trivet.  The last name denotes the check
@@ -286,8 +280,8 @@ wait_sem(fullTrivets[position]);
 	  do is be sure that the trivet on your right does not
 	  have a dish on it now.*/
 
+	wait_sem(emptyTrivets[position+1]);
 
-signal_sem(fullTrivets[position+1]);
 
     pthread_mutex_lock(&stdoutLock) ;
     cout << "Diner number "<< position << " moves "
@@ -305,8 +299,8 @@ signal_sem(fullTrivets[position+1]);
 	  is now empty.  The person on your right will need to
 	  find out that the trivet on your right now has a new
 	  dish on it.  */
-
-
+	 signal_sem(emptyTrivets[position]);
+	 signal_sem(fullTrivets[position+1]);
 
   }
   pthread_exit ((void *)0) ;
